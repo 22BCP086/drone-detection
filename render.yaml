@@ -2,7 +2,10 @@ services:
   - type: web
     name: drone-detection-api
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: |
+      pip install -r requirements.txt
+      git clone https://github.com/ultralytics/yolov5.git
+      pip install ./yolov5
     startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
     plan: free
     autoDeploy: true
