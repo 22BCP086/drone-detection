@@ -11,7 +11,12 @@ app = FastAPI()
 
 # Load your YOLOv5 model
 print("🔹 Loading model...")
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='best.pt', force_reload=False)
+# model = torch.hub.load('ultralytics/yolov5', 'custom', path='best.pt', force_reload=False)
+
+import os
+MODEL_DIR = os.path.join(os.getcwd(), "yolov5")
+model = torch.hub.load(MODEL_DIR, 'custom', path='best.pt', source='local')
+
 print("✅ Model loaded successfully.")
 
 @app.post("/detect")
